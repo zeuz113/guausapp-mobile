@@ -1,6 +1,6 @@
 var transmit = false;
 
-var socket = new io.connect();
+var socket = new io.connect('http://10.0.1.220:1234');
 var ID;
 
 socket.on('connect', function(){
