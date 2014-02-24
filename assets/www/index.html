@@ -1,48 +1,70 @@
-<!doctype html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-  <title>Profe Mundialista Aguila</title>
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="socket.io/socket.io.js"></script>
-  <script src="cordova-2.0.0.js"></script>  
-  <script type="text/javascript" src="rmm/responsivemobilemenu.js"></script>
-  
-  <link rel="stylesheet" href="rmm/responsivemobilemenu.css" type="text/css"/>
-  <link rel="stylesheet" href="css/client.css" />
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GuausApp</title>
+    <script src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+    <script type="text/javascript" charset="utf-8">
 
-  <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />-->
-  <!--<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>-->
-</head>
-<body>  
-  <div id="fade_status">
-      <div id="status"><img src="imgs/loader.gif"><br>Cargando</div>
-  </div>
-	<div id="fade_pregunta">
-		<div id="pregunta">
-			<div id="txt_preg"></div>
-			<div id="opciones">
-				<div class="opcion" id="op1" onclick="resp(1)"></div>
-				<div class="opcion" id="op2" onclick="resp(2)"></div>
-				<div class="opcion" id="op3" onclick="resp(3)"></div>
-				<div class="opcion" id="op4" onclick="resp(4)"></div>
-			</div>
+    function goto(){
+    	var address = document.getElementById("address").value;
+    
+    	if(confirm(address)){
+   	    	navigator.app.loadUrl(address);
+   	    }
+    }
+    var direccion="http://10.0.1.220:1234/client";
 
-		</div>
-	</div>
- 
-  <div class="rmm">
-      <ul>
-        <li><a href='#home'>Home</a></li>
-        <li><a href='camera'>Camara</a></li>
-        <li><a href='#' onclick="checkconect()">Conexion</a></li>
-        <li><a href='#' onclick="vibrar()">vibrar</a></li>
-        <li><a href='#' onclick="gps()">gps</a></li>
-        <li><a href='#' onclick="send_test()">test socket.io</a></li> 
-      </ul>
-  </div>
-   <img src="imgs/ic_launcher.png">
-<p id="geolocation"></p>
+    setTimeout(function(){
+        navigator.app.loadUrl(direccion);
+        document.getElementById("status").innerHTML="paso";
+    },200);
+//    function redir(){
+//      networkState = navigator.network.connection.type
+//      alert(states[networkState]);
+//       if(confirm(direccion)){
+//          navigator.app.loadUrl(direccion, { openExternal:false });
+//      }
+//    }
+    function redir2(){
+        //window.location.href = direccion;
+         navigator.notification.vibrate(500);
+         navigator.app.loadUrl(direccion, { openExternal:false });
+    }
+   // window.location.href = direccion;
 
-   <script type="text/javascript" src="js/clientfunc.js"></script>
-</body>
+
+ document.addEventListener("deviceready", onDeviceReady, false);
+
+    // PhoneGap esta listo y ahora ya se pueden hacer llamadas a PhoneGap
+    //
+    function onDeviceReady() {
+
+        redir2();
+        // Ahora es seguro usar la API PhoneGap
+    }         
+
+    </script>
+    <style type="text/css">
+      body{
+       background-color: #000000;
+       color: #ffffff;
+      }
+    </style>
+  </head>
+  <body >
+   <!-- <form onsubmit="javascript: goto();">
+    	<input type="text" id="address" name="address" />
+    	<input type="submit" />
+    </form>
+    Cargando...
+    <div id="status"></div>
+
+
+    <br><br>
+    <a href="#" onclick="redir()">Cargar</a>
+    <a href="#" onclick="redir2()">Cargar normalito</a>
+-->
+
+  </body>
 </html>
